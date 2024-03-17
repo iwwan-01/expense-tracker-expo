@@ -6,16 +6,52 @@ import {
   faCreditCard,
   faCalendarDays,
   faPiggyBank,
+  faCircle,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { Home } from '../screens/Home';
 import { Accounts } from '../screens/Accounts';
 import { Subscriptions } from '../screens/Subscriptions';
 import { Budgeting } from '../screens/Budgeting';
+import { Pressable } from 'react-native';
+
+import { View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
-library.add(faHome, faCreditCard, faCalendarDays, faPiggyBank);
+library.add(
+  faHome,
+  faCreditCard,
+  faCalendarDays,
+  faPiggyBank,
+  faCircle,
+  faPlus
+);
+
+const CustomTabBarButton = ({ onPress }) => {
+  return (
+    <Pressable onPress={onPress}>
+      <View
+        style={{
+          position: 'relative',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: 60,
+          height: 60,
+        }}
+      >
+        <FontAwesomeIcon icon='circle' color='#ff7f41' size={70} />
+        <FontAwesomeIcon
+          icon='plus'
+          color='white'
+          size={40}
+          style={{ position: 'absolute', zIndex: 99 }}
+        />
+      </View>
+    </Pressable>
+  );
+};
 
 export const TabNavigator = () => {
   return (
@@ -24,9 +60,20 @@ export const TabNavigator = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          display: 'flex',
+          position: 'absolute',
+          bottom: 35,
+          left: 20,
+          right: 20,
+          elevation: 0,
           backgroundColor: '#29304e',
+          borderRadius: 30,
+          height: 60,
         },
+        tabBarItemStyle: {
+          top: 15,
+        },
+        tabBarActiveTintColor: '#ff7f41',
+        tabBarInactiveTintColor: '#f0ecf4',
         tabBarIcon: ({ focused, color, size }) => {
           switch (route.name) {
             case 'Home':
@@ -49,12 +96,23 @@ export const TabNavigator = () => {
               );
           }
         },
-        tabBarActiveTintColor: '#ff7f41',
-        tabBarInactiveTintColor: '#f0ecf4',
       })}
     >
       <Tab.Screen name='Home' component={Home} />
       <Tab.Screen name='Accounts' component={Accounts} />
+      <Tab.Screen
+        name='Transaction'
+        // Placeholder component
+        component={Home}
+        options={{
+          tabBarButton: (props) => (
+            <CustomTabBarButton
+              {...props}
+              onPress={() => console.log('Button pressed!')}
+            />
+          ),
+        }}
+      />
       {/* Global Modal (Add Button) */}
       <Tab.Screen name='Subscriptions' component={Subscriptions} />
       <Tab.Screen name='Budgeting' component={Budgeting} />
