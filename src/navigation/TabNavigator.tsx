@@ -1,6 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { HomeStack } from './HomeStack';
+import { useNavigation } from '@react-navigation/native';
+
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faHome,
   faCreditCard,
@@ -9,14 +11,15 @@ import {
   faCircle,
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
-import { Home } from '../screens/Home';
-import { Accounts } from '../screens/Accounts';
-import { Subscriptions } from '../screens/Subscriptions';
-import { Budgeting } from '../screens/Budgeting';
-import { Pressable } from 'react-native';
+import { HomeScreen } from '../screens/HomeScreen';
+import { AccountsScreen } from '../screens/AccountsScreen';
+import { SubscriptionsScreen } from '../screens/SubscriptionsScreen';
+import { BudgetingScreen } from '../screens/BudgetingScreen';
+import { AddTransactionScreen } from '../screens/AddTransactionScreen';
 
-import { View } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,6 +42,7 @@ const CustomTabBarButton = ({ onPress }) => {
           alignItems: 'center',
           width: 60,
           height: 60,
+          ...styles.shadow,
         }}
       >
         <FontAwesomeIcon icon='circle' color='#ff7f41' size={70} />
@@ -46,7 +50,7 @@ const CustomTabBarButton = ({ onPress }) => {
           icon='plus'
           color='white'
           size={40}
-          style={{ position: 'absolute', zIndex: 99 }}
+          style={{ position: 'absolute', zIndex: 1 }}
         />
       </View>
     </Pressable>
@@ -54,14 +58,15 @@ const CustomTabBarButton = ({ onPress }) => {
 };
 
 export const TabNavigator = () => {
+  const navigation = useNavigation();
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
-          bottom: 35,
+          bottom: 40,
           left: 20,
           right: 20,
           elevation: 0,
@@ -69,53 +74,104 @@ export const TabNavigator = () => {
           borderRadius: 30,
           height: 60,
         },
-        tabBarItemStyle: {
-          top: 15,
-        },
+
         tabBarActiveTintColor: '#ff7f41',
         tabBarInactiveTintColor: '#f0ecf4',
-        tabBarIcon: ({ focused, color, size }) => {
-          switch (route.name) {
-            case 'Home':
-              return <FontAwesomeIcon icon='home' color={color} size={size} />;
-            case 'Accounts':
-              return (
-                <FontAwesomeIcon icon='credit-card' color={color} size={size} />
-              );
-            case 'Subscriptions':
-              return (
-                <FontAwesomeIcon
-                  icon='calendar-days'
-                  color={color}
-                  size={size}
-                />
-              );
-            case 'Budgeting':
-              return (
-                <FontAwesomeIcon icon='piggy-bank' color={color} size={size} />
-              );
-          }
-        },
-      })}
+      }}
     >
-      <Tab.Screen name='Home' component={Home} />
-      <Tab.Screen name='Accounts' component={Accounts} />
+      <Tab.Screen
+        name='Home'
+        component={HomeStack}
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return (
+              <FontAwesomeIcon
+                style={styles.icon}
+                icon='home'
+                color={color}
+                size={size}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name='Accounts'
+        component={AccountsScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return (
+              <FontAwesomeIcon
+                style={styles.icon}
+                icon='credit-card'
+                color={color}
+                size={size}
+              />
+            );
+          },
+        }}
+      />
+      {/* Custom Tab Bar Button */}
       <Tab.Screen
         name='Transaction'
-        // Placeholder component
-        component={Home}
+        component={AddTransactionScreen}
         options={{
           tabBarButton: (props) => (
             <CustomTabBarButton
               {...props}
-              onPress={() => console.log('Button pressed!')}
+              onPress={() => navigation.navigate('AddTransactionScreen')}
             />
           ),
         }}
       />
-      {/* Global Modal (Add Button) */}
-      <Tab.Screen name='Subscriptions' component={Subscriptions} />
-      <Tab.Screen name='Budgeting' component={Budgeting} />
+      <Tab.Screen
+        name='Subscriptions'
+        component={SubscriptionsScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return (
+              <FontAwesomeIcon
+                style={styles.icon}
+                icon='calendar-days'
+                color={color}
+                size={size}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name='Budgeting'
+        component={BudgetingScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return (
+              <FontAwesomeIcon
+                style={styles.icon}
+                icon='piggy-bank'
+                color={color}
+                size={size}
+              />
+            );
+          },
+        }}
+      />
     </Tab.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  icon: {
+    top: 15,
+  },
+  shadow: {
+    shadowColor: '#7F5DF0',
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 3.5,
+    elevation: 5,
+  },
+});

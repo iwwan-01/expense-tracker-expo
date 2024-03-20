@@ -9,7 +9,7 @@ import { AddTransaction } from '../components/AddTransaction';
 
 const windowHeight = Dimensions.get('window').height;
 
-export const Home: React.FC = () => {
+export const HomeScreen: React.FC = () => {
   return (
     <>
       <StatusBar />
