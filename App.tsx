@@ -2,20 +2,20 @@ import { useFonts } from 'expo-font';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { TabNavigator } from './navigation/TabNavigator';
+import { TabNavigator } from './src/navigation/TabNavigator';
 
-import { GlobalProvider } from './context/GlobalState';
-import { AddTransactionScreen } from './screens/AddTransactionScreen';
+import { GlobalProvider } from './src/context/GlobalState';
+import { AddTransactionScreen } from './src/screens/AddTransactionScreen';
 
 const RootStack = createStackNavigator();
 
 export const App: React.FC = () => {
   const [fontsLoaded, fontError] = useFonts({
-    'Poppins-Light': require('../assets/fonts/Poppins-Light.ttf'),
-    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
-    'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
-    'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
+    'Poppins-Light': require('./assets/fonts/Poppins-Light.ttf'),
+    'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-Medium': require('./assets/fonts/Poppins-Medium.ttf'),
+    'Poppins-SemiBold': require('./assets/fonts/Poppins-SemiBold.ttf'),
+    'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf'),
   });
 
   if (!fontsLoaded && !fontError) {

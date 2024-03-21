@@ -30,6 +30,7 @@ library.add(
   faPlus
 );
 
+//@ts-ignore
 const CustomTabBarButton = ({ onPress }) => {
   return (
     <Pressable onPress={onPress}>
@@ -114,6 +115,7 @@ export const TabNavigator: React.FC = () => {
         /* Pass in a blank component as the base (this never gets shown) */
         component={AddTransactionScreen}
         options={{
+          //@ts-ignore
           tabBarButton: (props) => <CustomTabBarButton {...props} />,
           tabBarStyle: { display: 'none' },
         }}

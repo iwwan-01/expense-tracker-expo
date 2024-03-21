@@ -11,7 +11,7 @@ import {
   Pressable,
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { Fonts, Typography } from '../styles';
+import { Fonts } from '../styles';
 
 import { GlobalContext } from '../context/GlobalState';
 
@@ -34,6 +34,7 @@ export const AddTransaction: React.FC = () => {
     };
 
     addTransaction(newTransaction);
+    //@ts-ignore
     navigation.navigate('main');
   };
 
