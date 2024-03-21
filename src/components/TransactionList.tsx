@@ -42,7 +42,7 @@ export const TransactionList: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 120,
+    flex: 1,
     width: 350,
     marginBottom: 40,
   },

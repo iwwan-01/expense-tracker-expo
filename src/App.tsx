@@ -1,9 +1,13 @@
 import { useFonts } from 'expo-font';
 
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { TabNavigator } from './navigation/TabNavigator';
 
 import { GlobalProvider } from './context/GlobalState';
+import { AddTransactionScreen } from './screens/AddTransactionScreen';
+
+const RootStack = createStackNavigator();
 
 export const App: React.FC = () => {
   const [fontsLoaded, fontError] = useFonts({
@@ -21,7 +25,24 @@ export const App: React.FC = () => {
   return (
     <GlobalProvider>
       <NavigationContainer>
-        <TabNavigator />
+        <RootStack.Navigator
+          screenOptions={{ headerShown: false, cardStyle: { flex: 1 } }}
+        >
+          <RootStack.Screen
+            name='main'
+            component={TabNavigator}
+          ></RootStack.Screen>
+          <RootStack.Screen
+            name='transaction'
+            component={AddTransactionScreen}
+            options={{
+              presentation: 'modal',
+              cardStyle: {
+                borderRadius: 40,
+              },
+            }}
+          ></RootStack.Screen>
+        </RootStack.Navigator>
       </NavigationContainer>
     </GlobalProvider>
   );

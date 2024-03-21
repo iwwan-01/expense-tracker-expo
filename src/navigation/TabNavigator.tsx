@@ -1,6 +1,4 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeStack } from './HomeStack';
-import { useNavigation } from '@react-navigation/native';
+import { View, StyleSheet, Pressable } from 'react-native';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
@@ -13,13 +11,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import { HomeScreen } from '../screens/HomeScreen';
 import { AccountsScreen } from '../screens/AccountsScreen';
 import { SubscriptionsScreen } from '../screens/SubscriptionsScreen';
 import { BudgetingScreen } from '../screens/BudgetingScreen';
 import { AddTransactionScreen } from '../screens/AddTransactionScreen';
-
-import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -57,11 +55,10 @@ const CustomTabBarButton = ({ onPress }) => {
   );
 };
 
-export const TabNavigator = () => {
-  const navigation = useNavigation();
+export const TabNavigator: React.FC = () => {
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -77,11 +74,11 @@ export const TabNavigator = () => {
 
         tabBarActiveTintColor: '#ff7f41',
         tabBarInactiveTintColor: '#f0ecf4',
-      }}
+      })}
     >
       <Tab.Screen
         name='Home'
-        component={HomeStack}
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => {
             return (
@@ -114,15 +111,18 @@ export const TabNavigator = () => {
       {/* Custom Tab Bar Button */}
       <Tab.Screen
         name='Transaction'
+        /* Pass in a blank component as the base (this never gets shown) */
         component={AddTransactionScreen}
         options={{
-          tabBarButton: (props) => (
-            <CustomTabBarButton
-              {...props}
-              onPress={() => navigation.navigate('AddTransactionScreen')}
-            />
-          ),
+          tabBarButton: (props) => <CustomTabBarButton {...props} />,
+          tabBarStyle: { display: 'none' },
         }}
+        listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            e.preventDefault();
+            navigation.navigate('transaction');
+          },
+        })}
       />
       <Tab.Screen
         name='Subscriptions'

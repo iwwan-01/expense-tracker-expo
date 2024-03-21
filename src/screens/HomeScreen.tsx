@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 
-import { SafeAreaView, View, StyleSheet, Dimensions } from 'react-native';
+// This fixes the modal breaking the SafeAreaView! 👇🏻
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, StyleSheet, Dimensions } from 'react-native';
+
 import { Header } from '../components/Header';
 import { Balance } from '../components/Balance';
 import { IncomeExpenses } from '../components/IncomeExpenses';
 import { TransactionList } from '../components/TransactionList';
-import { AddTransaction } from '../components/AddTransaction';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -14,13 +16,12 @@ export const HomeScreen: React.FC = () => {
     <>
       <StatusBar />
       <SafeAreaView style={styles.body}>
-        {/* <Header />
+        <Header />
         <View style={styles.container}>
           <Balance />
           <IncomeExpenses />
-        </View> */}
+        </View>
         <TransactionList />
-        <AddTransaction />
       </SafeAreaView>
     </>
   );

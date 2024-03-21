@@ -15,12 +15,15 @@ import { Fonts, Typography } from '../styles';
 
 import { GlobalContext } from '../context/GlobalState';
 
+import { useNavigation } from '@react-navigation/native';
+
 export const AddTransaction: React.FC = () => {
   const [transactionNote, setTransactionNote] = useState('');
   const [transactionValue, setTransactionValue] = useState('');
   const [transactionType, setTransactionType] = useState('expense');
 
   const { addTransaction } = useContext(GlobalContext);
+  const navigation = useNavigation();
 
   const handleSubmit = () => {
     const newTransaction = {
@@ -31,29 +34,12 @@ export const AddTransaction: React.FC = () => {
     };
 
     addTransaction(newTransaction);
+    navigation.navigate('main');
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.addTransactionLabel}>Add new transaction</Text>
-      <View>
-        <Text style={styles.transactionFieldLabel}>Transaction Note</Text>
-        <TextInput
-          style={styles.transactionFieldTextInput}
-          placeholder='Please enter a transaction note'
-          onChangeText={setTransactionNote}
-          value={transactionNote}
-        />
-      </View>
-      <View>
-        <Text style={styles.transactionFieldLabel}>Transaction Value</Text>
-        <TextInput
-          style={styles.transactionFieldTextInput}
-          placeholder='Please enter a transaction value'
-          onChangeText={setTransactionValue}
-          value={transactionValue}
-        />
-      </View>
       <View>
         <Text style={styles.transactionFieldLabel}>Transaction Type</Text>
         <RNPickerSelect
@@ -71,8 +57,26 @@ export const AddTransaction: React.FC = () => {
           ]}
         ></RNPickerSelect>
       </View>
+      <View>
+        <Text style={styles.transactionFieldLabel}>Transaction Value</Text>
+        <TextInput
+          style={styles.transactionFieldTextInput}
+          placeholder='Please enter a transaction value'
+          onChangeText={setTransactionValue}
+          value={transactionValue}
+        />
+      </View>
+      <View>
+        <Text style={styles.transactionFieldLabel}>Transaction Note</Text>
+        <TextInput
+          style={styles.transactionFieldTextInput}
+          placeholder='Please enter a transaction note'
+          onChangeText={setTransactionNote}
+          value={transactionNote}
+        />
+      </View>
       <Pressable style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Add a transaction</Text>
+        <Text style={styles.buttonText}>Add transaction</Text>
       </Pressable>
     </View>
   );
@@ -100,6 +104,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 40,
     borderColor: '#dedede',
+    backgroundColor: 'white',
     paddingVertical: 5,
     paddingLeft: 15,
   } as TextStyle,
@@ -108,9 +113,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingVertical: 5,
     borderRadius: 40,
-    backgroundColor: '#ff7f41',
+    backgroundColor: '#29304e',
     justifyContent: 'center',
     alignItems: 'center',
+    height: 50,
   },
   buttonText: {
     fontSize: 16,

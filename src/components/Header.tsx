@@ -23,7 +23,7 @@ export const Header: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.greeting}>Hello! 👋🏻</Text>
+      <Text style={styles.greeting}>Good morning! 👋🏻</Text>
       <Text style={styles.name}>{formattedName}</Text>
     </View>
   );
