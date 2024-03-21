@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Platform, TextStyle } from 'react-native';
-import { Fonts, Typography } from '../styles';
+import { Fonts } from '../styles';
 
 import { GlobalContext } from '../context/GlobalState';
 
@@ -25,7 +25,7 @@ export const Balance: React.FC = () => {
 
   return (
     <View>
-      <Text style={styles.balanceLabel}>Your Balance</Text>
+      <Text style={styles.balanceLabel}>Total Balance</Text>
       <Text style={styles.balance}>{total} BGN</Text>
       <Text style={styles.balanceEur}>€{totalEUR}</Text>
     </View>
@@ -34,7 +34,9 @@ export const Balance: React.FC = () => {
 
 const styles = StyleSheet.create({
   balanceLabel: {
-    ...Typography.h4,
+    ...Fonts.poppinsMedium[Platform.OS],
+    textTransform: 'uppercase',
+    fontSize: 14,
     color: 'white',
   } as TextStyle,
   balance: {
@@ -49,6 +51,6 @@ const styles = StyleSheet.create({
     margin: 0,
     fontSize: 18,
     ...Fonts.poppinsRegular[Platform.OS],
-    color: 'white',
+    color: '#dedede',
   } as TextStyle,
 });

@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Platform, TextStyle } from 'react-native';
-import { Fonts, Typography } from '../styles';
+import { Fonts } from '../styles';
 
 import { GlobalContext } from '../context/GlobalState';
+
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 export const IncomeExpenses: React.FC = () => {
   const { state } = useContext(GlobalContext);
@@ -23,11 +26,33 @@ export const IncomeExpenses: React.FC = () => {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.incomeLabel}>Income</Text>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            columnGap: 3,
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowUp} color='#2ecc71' />
+          <Text style={styles.incomeLabel}>Income</Text>
+        </View>
         <Text style={[styles.money, styles.moneyPlus]}>+{income} BGN</Text>
       </View>
       <View>
-        <Text style={styles.expenseLabel}>Expense</Text>
+        <View>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              columnGap: 3,
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowDown} color='#c0392b' />
+            <Text style={styles.expenseLabel}>Expense</Text>
+          </View>
+        </View>
         <Text style={[styles.money, styles.moneyMinus]}>-{expenses} BGN</Text>
       </View>
     </View>
@@ -43,23 +68,27 @@ const styles = StyleSheet.create({
   },
   money: {
     ...Fonts.poppinsSemiBold[Platform.OS],
-    fontSize: 20,
+    fontSize: 16,
     letterSpacing: 1,
     marginTop: 5,
     marginHorizontal: 0,
   } as TextStyle,
   incomeLabel: {
-    ...Typography.h4,
+    ...Fonts.poppinsMedium[Platform.OS],
+    fontSize: 16,
+    textTransform: 'uppercase',
     color: 'white',
   } as TextStyle,
   moneyPlus: {
-    color: '#2ecc71',
+    color: 'white',
   },
   expenseLabel: {
-    ...Typography.h4,
+    ...Fonts.poppinsMedium[Platform.OS],
+    fontSize: 16,
+    textTransform: 'uppercase',
     color: 'white',
   } as TextStyle,
   moneyMinus: {
-    color: '#c0392b',
+    color: 'white',
   },
 });

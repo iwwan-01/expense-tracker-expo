@@ -40,41 +40,85 @@ export const AddTransaction: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.addTransactionLabel}>Add new transaction</Text>
-      <View>
-        <Text style={styles.transactionFieldLabel}>Transaction Type</Text>
-        <RNPickerSelect
-          style={{
-            inputWeb: styles.transactionFieldTextInput,
-            inputIOS: styles.transactionFieldTextInput,
-            inputAndroid: styles.transactionFieldTextInput,
-          }}
-          placeholder={{}}
-          value={transactionType}
-          onValueChange={(value: string) => setTransactionType(value)}
-          items={[
-            { label: 'Expense', value: 'expense' },
-            { label: 'Income', value: 'income' },
-          ]}
-        ></RNPickerSelect>
+      {/* Picker Input Group */}
+      <View style={{ marginTop: 20 }}>
+        <View>
+          <Text style={styles.transactionFieldLabel}>Transaction Type</Text>
+          <RNPickerSelect
+            style={{
+              inputWeb: styles.transactionFieldTextInput,
+              inputIOS: styles.transactionFieldTextInput,
+              inputAndroid: styles.transactionFieldTextInput,
+            }}
+            placeholder={{}}
+            value={transactionType}
+            onValueChange={(value: string) => setTransactionType(value)}
+            items={[
+              { label: 'Expense', value: 'expense' },
+              { label: 'Income', value: 'income' },
+            ]}
+          ></RNPickerSelect>
+        </View>
+        <View>
+          <Text style={styles.transactionFieldLabel}>
+            Transaction Category (Disabled)
+          </Text>
+          <RNPickerSelect
+            style={{
+              inputWeb: styles.transactionFieldTextInput,
+              inputIOS: styles.transactionFieldTextInput,
+              inputAndroid: styles.transactionFieldTextInput,
+            }}
+            disabled={true}
+            placeholder={{}}
+            // This needs to be replaced with transactionCategory! 👇🏻
+            value={transactionType}
+            onValueChange={(value: string) => setTransactionType(value)}
+            items={[{ label: 'Shopping', value: 'shopping' }]}
+          ></RNPickerSelect>
+        </View>
+        <View>
+          <Text style={styles.transactionFieldLabel}>
+            Transaction Currency (Disabled)
+          </Text>
+          <RNPickerSelect
+            style={{
+              inputWeb: styles.transactionFieldTextInput,
+              inputIOS: styles.transactionFieldTextInput,
+              inputAndroid: styles.transactionFieldTextInput,
+            }}
+            disabled={true}
+            placeholder={{}}
+            // This needs to be replaced with transactionCurrency! 👇🏻
+            value={transactionType}
+            onValueChange={(value: string) => setTransactionType(value)}
+            items={[{ label: 'BGN', value: 'bgn' }]}
+          ></RNPickerSelect>
+        </View>
       </View>
-      <View>
-        <Text style={styles.transactionFieldLabel}>Transaction Value</Text>
-        <TextInput
-          style={styles.transactionFieldTextInput}
-          placeholder='Please enter a transaction value'
-          onChangeText={setTransactionValue}
-          value={transactionValue}
-        />
+
+      {/* Text Input Group */}
+      <View style={{ marginTop: 40 }}>
+        <View>
+          <Text style={styles.transactionFieldLabel}>Transaction Value</Text>
+          <TextInput
+            style={styles.transactionFieldTextInput}
+            placeholder='1.000,00 BGN'
+            onChangeText={setTransactionValue}
+            value={transactionValue}
+          />
+        </View>
+        <View>
+          <Text style={styles.transactionFieldLabel}>Transaction Note</Text>
+          <TextInput
+            style={styles.transactionFieldTextInput}
+            placeholder='Groceries'
+            onChangeText={setTransactionNote}
+            value={transactionNote}
+          />
+        </View>
       </View>
-      <View>
-        <Text style={styles.transactionFieldLabel}>Transaction Note</Text>
-        <TextInput
-          style={styles.transactionFieldTextInput}
-          placeholder='Please enter a transaction note'
-          onChangeText={setTransactionNote}
-          value={transactionNote}
-        />
-      </View>
+
       <Pressable style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Add transaction</Text>
       </Pressable>
@@ -84,17 +128,18 @@ export const AddTransaction: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: 350,
   },
   addTransactionLabel: {
-    ...Typography.h3,
+    marginTop: 60,
+    fontSize: 24,
+    ...Fonts.poppinsSemiBold[Platform.OS],
   } as TextStyle,
   transactionFieldLabel: {
     marginTop: 10,
     marginHorizontal: 0,
-    fontSize: 18,
-    ...Fonts.poppinsRegular[Platform.OS],
+    fontSize: 16,
+    ...Fonts.poppinsMedium[Platform.OS],
   } as TextStyle,
   transactionFieldTextInput: {
     marginTop: 10,
@@ -105,12 +150,12 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     borderColor: '#dedede',
     backgroundColor: 'white',
-    paddingVertical: 5,
+    paddingVertical: 10,
     paddingLeft: 15,
   } as TextStyle,
 
   button: {
-    marginTop: 20,
+    marginTop: 60,
     paddingVertical: 5,
     borderRadius: 40,
     backgroundColor: '#29304e',

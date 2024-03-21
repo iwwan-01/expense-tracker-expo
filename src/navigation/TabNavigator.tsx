@@ -40,7 +40,7 @@ const CustomTabBarButton = ({ onPress }) => {
           alignItems: 'center',
           width: 60,
           height: 60,
-          ...styles.shadow,
+          // ...styles.shadow,
         }}
       >
         <FontAwesomeIcon icon='circle' color='#ff7f41' size={70} />
@@ -58,7 +58,7 @@ const CustomTabBarButton = ({ onPress }) => {
 export const TabNavigator: React.FC = () => {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -74,7 +74,7 @@ export const TabNavigator: React.FC = () => {
 
         tabBarActiveTintColor: '#ff7f41',
         tabBarInactiveTintColor: '#f0ecf4',
-      })}
+      }}
     >
       <Tab.Screen
         name='Home'
@@ -164,8 +164,9 @@ const styles = StyleSheet.create({
   icon: {
     top: 15,
   },
+  // This works only on iOS! 👇🏻
   shadow: {
-    shadowColor: '#7F5DF0',
+    shadowColor: '#29304e',
     shadowOffset: {
       width: 0,
       height: 10,

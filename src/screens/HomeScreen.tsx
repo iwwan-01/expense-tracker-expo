@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: windowHeight,
+    marginTop: 20,
   },
   container: {
     marginTop: 20,
@@ -42,9 +42,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 30,
     width: 350,
-    borderWidth: 1,
+    height: 210,
     borderRadius: 30,
-    borderColor: '#dedede',
     backgroundColor: '#29304e',
   },
 });

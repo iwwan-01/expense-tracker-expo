@@ -12,6 +12,6 @@ export const h3 = {
 export const h4 = {
   margin: 0,
   textTransform: 'uppercase',
-  fontSize: 20,
+  fontSize: 18,
   ...Fonts.poppinsMedium[Platform.OS],
 };
