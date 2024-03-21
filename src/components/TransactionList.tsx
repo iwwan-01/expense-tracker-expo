@@ -18,7 +18,18 @@ export const TransactionList: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.transactionsLabel}>Transactions</Text>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: 30,
+        }}
+      >
+        <Text style={styles.transactionsLabel}>Transactions</Text>
+        <Text style={styles.viewAllLabel}>View All</Text>
+      </View>
       {transactions.length === 0 ? (
         <View style={styles.emptyListContainer}>
           <Text style={styles.emptyListText}>
@@ -29,6 +40,7 @@ export const TransactionList: React.FC = () => {
         <View>
           <FlatList
             style={styles.flatListContainer}
+            contentContainerStyle={{ rowGap: 10 }}
             data={transactions}
             renderItem={({ item: transaction }) => (
               <Transaction transaction={transaction} />
@@ -47,11 +59,13 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   flatListContainer: {
-    height: 120,
+    marginTop: 25,
+    height: 290,
     width: 350,
   },
   transactionsLabel: {
-    ...Typography.h3,
+    ...Fonts.poppinsMedium[Platform.OS],
+    fontSize: 20,
   } as TextStyle,
   emptyListContainer: {
     display: 'flex',
@@ -60,6 +74,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 40,
   },
+  viewAllLabel: {
+    ...Fonts.poppinsLight[Platform.OS],
+    fontSize: 16,
+    color: 'gray',
+  } as TextStyle,
   emptyListText: {
     ...Fonts.poppinsLight[Platform.OS],
   } as TextStyle,

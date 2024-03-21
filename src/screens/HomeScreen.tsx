@@ -15,13 +15,15 @@ export const HomeScreen: React.FC = () => {
   return (
     <>
       <StatusBar />
-      <SafeAreaView style={styles.body}>
-        <Header />
-        <View style={styles.container}>
-          <Balance />
-          <IncomeExpenses />
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        <View style={styles.body}>
+          <Header />
+          <View style={styles.container}>
+            <Balance />
+            <IncomeExpenses />
+          </View>
+          <TransactionList />
         </View>
-        <TransactionList />
       </SafeAreaView>
     </>
   );
@@ -30,6 +32,8 @@ export const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
+    // There is a weird gray box on top of the screen on native devices! 🤔
+    backgroundColor: '#ffffff',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -38,11 +42,10 @@ const styles = StyleSheet.create({
   },
   container: {
     marginTop: 20,
-    marginHorizontal: 'auto',
-    paddingTop: 20,
+    paddingVertical: 20,
     paddingHorizontal: 30,
     width: 350,
-    height: 210,
+    height: 200,
     borderRadius: 30,
     backgroundColor: '#29304e',
   },

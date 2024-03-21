@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { AddTransaction } from '../components/AddTransaction';
@@ -20,10 +20,9 @@ export const AddTransactionScreen: React.FC = () => {
           height: 5,
         }}
       ></Pressable>
-
-      <View style={{ alignItems: 'center' }}>
+      <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
         <AddTransaction />
-      </View>
+      </ScrollView>
     </View>
   );
 };

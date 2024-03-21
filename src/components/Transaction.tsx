@@ -8,6 +8,9 @@ import {
   Pressable,
 } from 'react-native';
 import { Fonts } from '../styles';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons';
+
 import { ITransaction } from '../types';
 
 import { GlobalContext } from '../context/GlobalState';
@@ -28,13 +31,18 @@ export const Transaction: React.FC<{ transaction: ITransaction }> = ({
       <Text style={styles.transactionNote}>{transaction.note}</Text>
       <Text style={[styles.transactionValue, transactionStyle]}>
         {transactionSign}
-        {transaction.value}
+        {transaction.value} BGN
       </Text>
       <Pressable
         style={styles.deleteButton}
         onPress={() => deleteTransaction(transaction.id)}
       >
-        <Text style={styles.deleteButtonText}>X</Text>
+        {/* <Text style={styles.deleteButtonText}>X</Text> */}
+        <FontAwesomeIcon
+          icon={faX}
+          size={14}
+          style={{ marginTop: 2, marginRight: 5 }}
+        />
       </Pressable>
     </View>
   );
@@ -42,24 +50,24 @@ export const Transaction: React.FC<{ transaction: ITransaction }> = ({
 
 const styles = StyleSheet.create({
   listItem: {
-    color: '#333',
+    backgroundColor: '#f0ecf4',
+    borderRadius: 30,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    position: 'relative',
-    marginVertical: 2,
-    paddingRight: 20,
+    paddingVertical: 10,
+    paddingRight: 30,
+    paddingLeft: 20,
   },
   transactionNote: {
-    margin: 0,
-    fontSize: 20,
-    ...Fonts.poppinsRegular[Platform.OS],
+    marginTop: 3,
+    fontSize: 15,
+    ...Fonts.poppinsMedium[Platform.OS],
   } as TextStyle,
   transactionValue: {
     ...Fonts.poppinsSemiBold[Platform.OS],
-    fontSize: 20,
-    letterSpacing: 1,
+    fontSize: 17,
     marginTop: 5,
     marginHorizontal: 0,
   } as TextStyle,

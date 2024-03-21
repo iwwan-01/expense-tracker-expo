@@ -102,8 +102,9 @@ export const AddTransaction: React.FC = () => {
         <View>
           <Text style={styles.transactionFieldLabel}>Transaction Value</Text>
           <TextInput
+            keyboardType='numeric'
             style={styles.transactionFieldTextInput}
-            placeholder='1.000,00 BGN'
+            placeholder='1000,00 BGN'
             onChangeText={setTransactionValue}
             value={transactionValue}
           />

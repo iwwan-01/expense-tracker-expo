@@ -4,7 +4,39 @@ import AppReducer from './AppReducer';
 
 // Initial state
 const initialState: IState = {
-  transactions: [],
+  // Placeholder transactions 👇🏻
+  transactions: [
+    {
+      id: '5',
+      type: 'expense',
+      value: 25.79,
+      note: 'Takeaway',
+    },
+    {
+      id: '4',
+      type: 'income',
+      value: 1128.91,
+      note: 'Supplementary Grant',
+    },
+    {
+      id: '3',
+      type: 'expense',
+      value: 50.26,
+      note: 'Groceries',
+    },
+    {
+      id: '2',
+      type: 'expense',
+      value: 752.05,
+      note: 'Tuition Fee',
+    },
+    {
+      id: '1',
+      type: 'income',
+      value: 1772.68,
+      note: 'Salary',
+    },
+  ],
 };
 
 // Create context
